@@ -30,13 +30,16 @@ public class ProductServiceImpl implements ProductService {
     log("Dang ket noi toi co so du lieu ...");
     conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-    log("Tao cac lenh truy van SQL ...");
+    log("Tao lenh truy van SQL ...");
     stmt = conn.createStatement();
     String sql;
     sql = "SELECT id, code, name FROM Product";
+
+    log("Dang thuc hien truy van...");
     ResultSet rs = stmt.executeQuery(sql);
 
     List<Product> products = new ArrayList<>();
+    log("Dang thu thap ket qua...");
     while (rs.next()) {
       Product product = new Product();
       product.setId(rs.getInt("id"));
@@ -45,10 +48,13 @@ public class ProductServiceImpl implements ProductService {
 
       products.add(product);
     }
+
+    log("Hoan thanh thu thap ket qua. Dang dong cac ket noi...");
     rs.close();
     stmt.close();
     conn.close();
 
+    log("Thanh cong!");
     return products;
   }
 
